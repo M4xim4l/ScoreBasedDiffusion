@@ -26,8 +26,9 @@ class SumOfGaussians:
         larger_than_prev = (rand_vals_minus_cum_weights > 0)[:, :-1]
         smaller_than_next = (rand_vals_minus_cum_weights <= 0)[:, 1:]
         distribution_idcs = larger_than_prev & smaller_than_next
-        assert torch.sum(distribution_idcs.view(-1)) == N
+
         samples = torch.zeros((N, len(self.means[0])))
         for dist_idx, dist in enumerate(self.multivar_norms):
             samples += distribution_idcs[:, dist_idx][:, None] * dist.sample((N,))
         return samples
+

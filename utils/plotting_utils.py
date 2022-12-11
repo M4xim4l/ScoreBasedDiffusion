@@ -24,9 +24,8 @@ def create_3d_hist(ax, data, x_min, x_max, y_min, y_max, n_bins=50):
     ax.bar3d(xpos, ypos, zpos, dx, dy, dz, zsort='average', color=rgba)
 
 
-def create_3d_hist_flat(ax, data, x_min, x_max, y_min, y_max, n_bins=50):
+def create_2d_hist(ax, data, x_min, x_max, y_min, y_max, n_bins=50):
     data_np = data.detach().numpy()
-    hist, xedges, yedges = np.histogram2d(data_np[:,0], data_np[:,1], bins=n_bins, range=[[x_min, x_max], [y_min, y_max]])
-    ax.imshow(hist, cmap='plasma')
-    ax.set_xticks([])
-    ax.set_yticks([])
+    ax.hist2d(data_np[:,0], data_np[:,1], bins=n_bins, range=[[x_min, x_max], [y_min, y_max]], cmap='plasma')
+    #ax.set_xticks([])
+    #ax.set_yticks([])
